@@ -20,13 +20,11 @@ pipeline {
         }
    
    
-   
 stage('Build Image') {
     environment { QUAY = credentials('QUAY_USER') } 
     steps {
         sh '''
-            ./mvnw quarkus:add-extension \
-            -Dextensions="kubernetes,container-image-jib" 
+            ./mvnw quarkus:add-extension -Dextensions="kubernetes,container-image-jib" 
         '''
         sh '''
             ./mvnw package -DskipTests \
@@ -36,8 +34,7 @@ stage('Build Image') {
             -Dquarkus.container-image.group=$QUAY_USR \ 
             -Dquarkus.container-image.name=do400-deploying-environments \ 
             -Dquarkus.container-image.username=$QUAY_USR \ 
-            -Dquarkus.container-image.password="$QUAY_PSW" \ 
-            -Dquarkus.container-image.push=true 
+            -Dquarkus.container-image.password="$QUAY_PSW" -Dquarkus.container-image.push=true 
         '''
     }
 }
