@@ -12,7 +12,7 @@ pipeline {
         DEPLOYMENT_STAGE = 'shopping-cart-stage' 
         DEPLOYMENT_PRODUCTION = 'shopping-cart-production'
     }
-    }
+    
     stages {
         stage('Tests') {
             steps {
